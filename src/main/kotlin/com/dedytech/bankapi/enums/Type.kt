@@ -5,5 +5,6 @@ enum class Type {
     CREDIT,
     DEPOSITORY,
     OTHER,
-    INVESTMENT
+    INVESTMENT,
+    DEBIT
 }

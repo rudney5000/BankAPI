@@ -8,9 +8,11 @@ data class RegisterRequest(
     var official_name: String = "",
     var email: String = "",
     var password: String = "",
+
 //    var role: Role,
 //    var subtypes: SubType,
 //    var types: Type,
 //    var currencies: Currency,
 //    var status: Status
+
 )
