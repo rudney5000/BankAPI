@@ -15,8 +15,8 @@ data class RegisterRequest(
     var isPercentageOnBalance: Boolean,
     var isUseCashBack: Boolean,
     var isEvenDistribution: Boolean,
-    var targets: Set<Target>,
-//    var superPriorityTarget_id: Long,
+    var targets: MutableSet<Target> = mutableSetOf(),
+    //    var superPriorityTarget_id: Long,
 
 
     @Enumerated(EnumType.STRING)

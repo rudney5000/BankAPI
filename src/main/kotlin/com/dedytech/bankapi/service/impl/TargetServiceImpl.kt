@@ -7,10 +7,14 @@ import com.dedytech.bankapi.entity.Target
 import com.dedytech.bankapi.repository.AccountRepository
 import com.dedytech.bankapi.repository.TargetRepository
 import com.dedytech.bankapi.service.TargetService
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import java.sql.Timestamp
 
+
+@Slf4j
 @Service
 class TargetServiceImpl(
     private val targetRepository: TargetRepository,
@@ -35,6 +39,7 @@ class TargetServiceImpl(
         )
 
         val savedTarget = targetRepository.save(target)
+        logger.info("savegarde reussi: {}", savedTarget)
 
         val targetDto = TargetDto(
             icon_id = savedTarget.icon_id,
@@ -45,11 +50,13 @@ class TargetServiceImpl(
             priority = savedTarget.priority,
             accountId = savedTarget.accountId
         )
-
         return ResponseEntity.ok(targetDto)
     }
+
 
     override fun updateTarget(account: Account, target: Target, targetRequest: TargetRequest): ResponseEntity<TargetDto> {
         TODO("Not yet implemented")
     }
 }
+
+private val logger = LoggerFactory.getLogger(TargetServiceImpl::class.java)

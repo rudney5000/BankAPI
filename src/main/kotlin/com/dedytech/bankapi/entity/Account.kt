@@ -4,9 +4,6 @@ import com.dedytech.bankapi.enums.*
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
-import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.authority.SimpleGrantedAuthority
-import org.springframework.security.core.userdetails.UserDetails
 import java.sql.Timestamp
 
 @Entity
@@ -30,7 +27,7 @@ data class Account(
         cascade = [CascadeType.ALL],
         fetch = FetchType.EAGER
     )
-    var targets: Set<Target>,
+    var targets: MutableSet<Target> = mutableSetOf(),
 
 
     @Enumerated(EnumType.STRING)
