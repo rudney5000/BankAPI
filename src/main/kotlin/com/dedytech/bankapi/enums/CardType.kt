@@ -1,6 +1,6 @@
 package com.dedytech.bankapi.enums
 
-enum class Type {
+enum class CardType {
 
     CREDIT,
     DEPOSITORY,
