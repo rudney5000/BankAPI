@@ -1,4 +1,4 @@
-package com.dedytech.bankapi.dto.response
+package com.dedytech.bankapi.dto.auth.response
 
 data class AuthenticationResponse(
     var token: String

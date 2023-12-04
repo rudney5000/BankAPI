@@ -1,6 +1,6 @@
 package com.dedytech.bankapi.config
 
-import com.dedytech.bankapi.dto.request.toAccountAuth
+import com.dedytech.bankapi.dto.auth.toAccountAuth
 import com.dedytech.bankapi.repository.AccountRepository
 import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired

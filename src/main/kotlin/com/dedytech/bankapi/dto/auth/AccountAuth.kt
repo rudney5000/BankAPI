@@ -1,4 +1,4 @@
-package com.dedytech.bankapi.dto.request
+package com.dedytech.bankapi.dto.auth
 
 import com.dedytech.bankapi.entity.Account
 import com.dedytech.bankapi.enums.Role
@@ -6,9 +6,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 data class AccountAuth(
-    var name: String = "",
-    var email: String = "",
-    private var password: String = "",
+    var name: String,
+    var email: String,
+    private var password: String,
     var role: Role,
 ): UserDetails {
     override fun getAuthorities() = listOf(SimpleGrantedAuthority(role.name))
@@ -27,7 +27,7 @@ data class AccountAuth(
 
 }
 
-fun Account.toAccountAuth():AccountAuth = AccountAuth(
+fun Account.toAccountAuth(): AccountAuth = AccountAuth(
     name = this.name,
     email = this.email,
     password = this.password,

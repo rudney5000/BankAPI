@@ -1,8 +1,8 @@
 package com.dedytech.bankapi.controller
 
-import com.dedytech.bankapi.dto.request.AuthenticationRequest
-import com.dedytech.bankapi.dto.response.AuthenticationResponse
-import com.dedytech.bankapi.dto.request.RegisterRequest
+import com.dedytech.bankapi.dto.auth.request.AuthenticationRequest
+import com.dedytech.bankapi.dto.auth.response.AuthenticationResponse
+import com.dedytech.bankapi.dto.auth.request.RegisterRequest
 import com.dedytech.bankapi.service.AuthenticationService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

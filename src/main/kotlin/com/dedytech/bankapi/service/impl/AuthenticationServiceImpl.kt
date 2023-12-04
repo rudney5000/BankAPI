@@ -1,11 +1,11 @@
 package com.dedytech.bankapi.service.impl
 
 import com.dedytech.bankapi.config.jwt.JwtService
-import com.dedytech.bankapi.dto.request.AuthenticationRequest
-import com.dedytech.bankapi.dto.request.RegisterRequest
-import com.dedytech.bankapi.dto.request.toAccountAuth
-import com.dedytech.bankapi.dto.request.toAccountEntity
-import com.dedytech.bankapi.dto.response.AuthenticationResponse
+import com.dedytech.bankapi.dto.auth.request.AuthenticationRequest
+import com.dedytech.bankapi.dto.auth.request.RegisterRequest
+import com.dedytech.bankapi.dto.auth.toAccountAuth
+import com.dedytech.bankapi.dto.auth.request.toAccountEntity
+import com.dedytech.bankapi.dto.auth.response.AuthenticationResponse
 import com.dedytech.bankapi.entity.Account
 import com.dedytech.bankapi.repository.AccountRepository
 import com.dedytech.bankapi.service.AuthenticationService
