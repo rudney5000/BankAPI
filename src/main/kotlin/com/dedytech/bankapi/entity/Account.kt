@@ -18,9 +18,8 @@ data class Account(
     @GeneratedValue
     var account_id: Long? = null,
     var name: String = "",
-    var official_name: String = "",
     var email: String = "",
-    private var password: String = "",
+    var password: String = "",
 
     @Enumerated(EnumType.STRING)
     var role: Role,
@@ -28,19 +27,4 @@ data class Account(
 //    var types: Type,
 //    var currencies: Currency,
 //    var status: Status
-): UserDetails {
-    override fun getAuthorities() = listOf(SimpleGrantedAuthority(role.name))
-
-    override fun getPassword() = password
-
-    override fun getUsername() = email
-
-    override fun isAccountNonExpired() = true
-
-    override fun isAccountNonLocked() = true
-
-    override fun isCredentialsNonExpired() = true
-
-    override fun isEnabled() = true
-
-}
+)

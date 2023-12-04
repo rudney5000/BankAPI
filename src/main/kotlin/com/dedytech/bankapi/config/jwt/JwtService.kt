@@ -1,4 +1,4 @@
-package com.dedytech.bankapi.security.jwt
+package com.dedytech.bankapi.config.jwt
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts

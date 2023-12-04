@@ -1,6 +1,6 @@
-package com.dedytech.bankapi.security.config
+package com.dedytech.bankapi.config
 
-import com.dedytech.bankapi.security.jwt.JwtAuthenticationFilter
+import com.dedytech.bankapi.config.jwt.JwtAuthenticationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationProvider
@@ -25,7 +25,7 @@ class SecurityConfiguration(
             .disable()
             .authorizeHttpRequests { requests ->
                 requests
-                    .requestMatchers("/api/v1/auth/**")
+                    .requestMatchers("/accounts/**")
                     .permitAll()
                     .anyRequest()
                     .authenticated()

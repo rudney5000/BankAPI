@@ -1,5 +1,6 @@
-package com.dedytech.bankapi.security.config
+package com.dedytech.bankapi.config
 
+import com.dedytech.bankapi.dto.request.toAccountAuth
 import com.dedytech.bankapi.repository.AccountRepository
 import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,7 +24,7 @@ class ApplicationConfiguration(
     fun userDetailsService(): UserDetailsService {
         return UserDetailsService { username ->
             repository.findByEmail(username)
-                .orElseThrow { UsernameNotFoundException("User not found") }
+                .orElseThrow { UsernameNotFoundException("User not found")}.toAccountAuth()
         }
     }
 

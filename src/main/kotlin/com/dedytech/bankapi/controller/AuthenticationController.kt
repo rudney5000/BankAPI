@@ -1,18 +1,17 @@
-package com.dedytech.bankapi.security.controller
+package com.dedytech.bankapi.controller
 
-import com.dedytech.bankapi.security.auth.AuthenticationRequest
-import com.dedytech.bankapi.security.auth.AuthenticationResponse
-import com.dedytech.bankapi.security.auth.RegisterRequest
-import com.dedytech.bankapi.security.service.AuthenticationService
+import com.dedytech.bankapi.dto.request.AuthenticationRequest
+import com.dedytech.bankapi.dto.response.AuthenticationResponse
+import com.dedytech.bankapi.dto.request.RegisterRequest
+import com.dedytech.bankapi.service.AuthenticationService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/accounts")
 class AuthenticationController(
     private var authenticationService: AuthenticationService
 ) {
