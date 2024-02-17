@@ -1,68 +1,55 @@
 package com.dedytech.bankapi.config.jwt
 
-import com.dedytech.bankapi.dto.auth.AccountAuth
+import com.dedytech.bankapi.dto.response.AccountAuth
+import com.dedytech.bankapi.utils.AppProperties
+import com.dedytech.bankapi.utils.Constant.JWT_TOKEN_EXPIRED
 import io.jsonwebtoken.Claims
+import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.io.Decoders
 import io.jsonwebtoken.security.Keys
 import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 import java.security.Key
 import java.util.*
+import javax.crypto.SecretKey
+@Component
+class JwtService(
+    appProperties: AppProperties
+) {
+    private val base64EncodeKey: ByteArray = Base64.getEncoder().encode(appProperties.plainSecretKey.toByteArray())
+    private val secretKey: SecretKey = Keys.hmacShaKeyFor(base64EncodeKey)
 
-@Service
-class JwtService {
-
-    private val SECRET_KEY = "4E645267556B58703273357638792F423F4528482B4D6251655368566D597133"
-
-    fun extractUsername(token: String): String {
-        return extractClaims(token, Claims::getSubject)
-    }
-
-    fun <T> extractClaims(token: String, claimsResolver: (Claims) -> T): T {
-        val claims = extractAllClaims(token)
-        return claimsResolver(claims)
-    }
-
-    fun generateToken(accountAuth: AccountAuth): String {
-        return generateToken(mapOf(), accountAuth)
-    }
-
-    fun generateToken(extractClaims: Map<String, Any>, userDetails: UserDetails): String {
+    fun generateTokenAccessToken(accountAuth: AccountAuth): String {
         return Jwts.builder()
-            .setClaims(extractClaims)
-            .setSubject(userDetails.username)
-            .setIssuedAt(Date(System.currentTimeMillis()))
-            .setExpiration(Date(System.currentTimeMillis() + 1000 * 60 * 24))
-            .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+            .setSubject(accountAuth.email)
+            .setIssuer("@luthfipun")
+            .claim("roles", accountAuth.roles.joinToString())
+            .setIssuedAt(Date())
+            .setExpiration(Date(System.currentTimeMillis() + JWT_TOKEN_EXPIRED))
+            .signWith(secretKey, SignatureAlgorithm.HS256)
             .compact()
     }
 
-    fun isTokenValid(token: String, userDetails: UserDetails): Boolean {
-        val username = extractUsername(token)
-        return username == userDetails.username && !isTokenExpired(token)
+    fun isTokenValid(token: String): Boolean {
+        return try {
+            Jwts.parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token)
+            true
+        }catch (e: JwtException) {
+            false
+        }
     }
-
-    private fun isTokenExpired(token: String): Boolean {
-        return extractExpiration(token).before(Date())
-    }
-
-    private fun extractExpiration(token: String): Date {
-        return extractClaims(token, Claims::getExpiration)
-    }
-
-
-    private fun extractAllClaims(token: String): Claims {
+    fun parseClaimsJws(token: String): Claims{
         return Jwts.parserBuilder()
-            .setSigningKey(getSignInKey())
-            .build()
-            .parseClaimsJws(token)
+           .setSigningKey(secretKey)
+           .build()
+           .parseClaimsJws(token)
             .body
     }
 
-    private fun getSignInKey(): Key {
-        val keyBytes = Decoders.BASE64.decode(SECRET_KEY)
-        return Keys.hmacShaKeyFor(keyBytes)
-    }
 }

@@ -6,6 +6,6 @@ import org.springframework.boot.runApplication
 @SpringBootApplication
 class BankApiApplication
 
-fun main(args: Array<String>) {
-    runApplication<BankApiApplication>(*args)
-}
+    fun main(args: Array<String>){
+        runApplication<BankApiApplication>(*args)
+    }

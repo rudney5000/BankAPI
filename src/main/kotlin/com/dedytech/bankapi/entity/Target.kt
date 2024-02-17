@@ -1,7 +1,5 @@
 package com.dedytech.bankapi.entity
 
-import com.dedytech.bankapi.enums.TargetPriority
-import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import java.sql.Timestamp
@@ -21,14 +19,14 @@ data class Target(
     @CreationTimestamp
     var created: Timestamp,
 
-    @Enumerated(EnumType.ORDINAL)
-    var priority: TargetPriority,
+//    @Enumerated(EnumType.ORDINAL)
+//    var priority: TargetPriority,
 
-    @Column(name = "account-id")
-    var accountId: Long,
+//    @Column(name = "account-id")
+//    var accountId: Long,
 
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    @JsonIgnore
-    var accounts: Account
+//    @ManyToOne
+//    @JoinColumn(name = "account_id")
+//    @JsonIgnore
+//    var accounts: Account
 )

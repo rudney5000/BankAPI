@@ -14,7 +14,19 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
+  security:
+    jwt:
+      token:
+        secret-key: 4E645267556B58703273357638792F423F4528482B4D6251655368566D597133
+        expire-length: 300000
+
+  springdoc:
+    swagger-ui:
+      path: /docs
+
 server:
   port: 8089
   servlet:
     context-path: /api/v1
+
+
