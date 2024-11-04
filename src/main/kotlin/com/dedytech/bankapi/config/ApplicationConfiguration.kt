@@ -1,6 +1,8 @@
-package com.dedytech.bankapi.security.config
+package com.dedytech.bankapi.config
 
+import com.dedytech.bankapi.dto.request.auth.toUserAuth
 import com.dedytech.bankapi.repository.AccountRepository
+import com.dedytech.bankapi.repository.UserRepository
 import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
@@ -17,13 +19,13 @@ import org.springframework.security.crypto.password.PasswordEncoder
 @Configuration
 @RequiredArgsConstructor
 class ApplicationConfiguration(
-    @Autowired private val repository: AccountRepository
+    @Autowired private val repository: UserRepository
 ){
     @Bean
     fun userDetailsService(): UserDetailsService {
         return UserDetailsService { username ->
             repository.findByEmail(username)
-                .orElseThrow { UsernameNotFoundException("User not found") }
+                .orElseThrow { UsernameNotFoundException("User not found") }.toUserAuth()
         }
     }
 

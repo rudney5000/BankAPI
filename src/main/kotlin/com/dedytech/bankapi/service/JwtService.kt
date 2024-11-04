@@ -1,5 +1,6 @@
-package com.dedytech.bankapi.security.jwt
+package com.dedytech.bankapi.service
 
+import com.dedytech.bankapi.dto.request.auth.UserAuth
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
@@ -24,13 +25,8 @@ class JwtService {
         return claimsResolver(claims)
     }
 
-//    fun <T> extractClaims(token: String, claimsResolver: Function<Claims, T>): T {
-//        val claims = extractAllClaims(token)
-//        return claimsResolver.apply(claims)
-//    }
-
-    fun generateToken(userDetails: UserDetails): String {
-        return generateToken(mapOf(), userDetails)
+    fun generateToken(userAuth: UserAuth): String {
+        return generateToken(mapOf(), userAuth)
     }
 
     fun generateToken(extractClaims: Map<String, Any>, userDetails: UserDetails): String {
